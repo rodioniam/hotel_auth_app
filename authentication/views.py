@@ -3,7 +3,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import User
 from .utils import hash_password, check_password, generate_token, decode_token
-from .serializers import UserRegisterSerializer, UserLoginSerializer
+from .serializers import UserRegisterSerializer, UserLoginSerializer, UserProfileSerializer
+
+# регистрация пользователя
 
 
 class RegisterView(APIView):
@@ -20,6 +22,8 @@ class RegisterView(APIView):
             )
             return Response({'message': 'User registered'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# вход пользователя с проверкой пароля
 
 
 class LoginView(APIView):
@@ -39,3 +43,14 @@ class LoginView(APIView):
             return Response({'error': 'Wrong email or password'}, status=status.HTTP_401_UNAUTHORIZED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ProfileView(APIView):
+    def get(self, request):
+        if request.user is None:
+            return Response({'error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        # тут не нужно делать валидацию так как читаю базу данных
+        # так же не надо передавать request через data=, так как просто читаю базу
+        serializer = UserProfileSerializer(request.user)
+        return Response(serializer.data)

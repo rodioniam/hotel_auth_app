@@ -1,3 +1,8 @@
+"""
+Выполняется при каждом запросе и проверяет есть ли токен у пользователя, достает его и записывает в request.
+Это нужно чтобы в дальнейшем отличать пользователй по токенам
+"""
+
 from .utils import decode_token
 from .models import User
 
@@ -7,7 +12,7 @@ class JWTAuthMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        if 'Authorization' in request.headers and request.headers.get('Authorization').starstwith('Bearer'):
+        if 'Authorization' in request.headers and request.headers.get('Authorization').startswith('Bearer'):
             try:
                 token = request.headers.get('Authorization').split(' ')[1]
                 user_id = decode_token(token)['user_id']

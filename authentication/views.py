@@ -2,8 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import User
-from .utils import hash_password
-from .serializers import UserRegisterSerializer
+from .utils import hash_password, check_password, generate_token, decode_token
+from .serializers import UserRegisterSerializer, UserLoginSerializer
 
 
 class RegisterView(APIView):
@@ -19,4 +19,23 @@ class RegisterView(APIView):
                 last_name=validated_data['last_name']
             )
             return Response({'message': 'User registered'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LoginView(APIView):
+    def post(self, request):
+        serializer = UserLoginSerializer(data=request.data)
+
+        if serializer.is_valid():
+            validated_data = serializer.validated_data
+
+            try:
+                user = User.objects.get(email=validated_data['email'])
+            except User.DoesNotExist:
+                return Response({'error': 'Wrong email or password'}, status=status.HTTP_401_UNAUTHORIZED)
+            if check_password(validated_data['password'], user.password_hash):
+                token = generate_token(user.pk)
+                return Response({'Token': token})
+            return Response({'error': 'Wrong email or password'}, status=status.HTTP_401_UNAUTHORIZED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

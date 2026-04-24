@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import User
 from .utils import hash_password, check_password, generate_token, decode_token
-from .serializers import UserRegisterSerializer, UserLoginSerializer, UserProfileSerializer
+from .serializers import *
 
 # регистрация пользователя
 
@@ -47,10 +47,36 @@ class LoginView(APIView):
 
 class ProfileView(APIView):
     def get(self, request):
-        if request.user is None:
+        if request.auth_user is None:
             return Response({'error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
 
         # тут не нужно делать валидацию так как читаю базу данных
         # так же не надо передавать request через data=, так как просто читаю базу
-        serializer = UserProfileSerializer(request.user)
+        serializer = UserProfileSerializer(request.auth_user)
         return Response(serializer.data)
+
+
+class ProfileUpdateView(APIView):
+    def patch(self, request):
+
+        if request.auth_user is None:
+            return Response({'error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        update_serializer = UserUpdateSerializer(data=request.data)
+
+        if update_serializer.is_valid():
+            update_data = update_serializer.validated_data
+            for k, v in update_data.items():
+                setattr(request.auth_user, k, v)
+            request.auth_user.save()
+
+            serializer = UserProfileSerializer(request.auth_user)
+            return Response(serializer.data)
+        return Response(update_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LogoutView(APIView):
+    def post(self, request):
+        if request.auth_user is None:
+            return Response({'error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({'message': 'You are logged out'}, status=status.HTTP_200_OK)

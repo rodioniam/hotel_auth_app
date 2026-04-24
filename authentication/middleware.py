@@ -16,11 +16,11 @@ class JWTAuthMiddleware:
             try:
                 token = request.headers.get('Authorization').split(' ')[1]
                 user_id = decode_token(token)['user_id']
-                request.user = User.objects.get(id=user_id)
+                request.auth_user = User.objects.get(id=user_id)
             except Exception:
-                request.user = None
+                request.auth_user = None
         else:
-            request.user = None
+            request.auth_user = None
 
         response = self.get_response(request)
         return response

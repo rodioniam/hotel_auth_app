@@ -1,0 +1,26 @@
+[
+    {
+        "model": "api.role",
+        "pk": 1,
+        "fields": {
+            "name": "admin",
+            "description": "Administrator"
+        }
+    },
+    {
+        "model": "api.role",
+        "pk": 2,
+        "fields": {
+            "name": "hotel_manager",
+            "description": "Hotel manager"
+        }
+    },
+    {
+        "model": "api.role",
+        "pk": 3,
+        "fields": {
+            "name": "guest",
+            "description": "Guest - regular user"
+        }
+    }
+]

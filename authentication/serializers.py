@@ -35,3 +35,14 @@ class UserUpdateSerializer(serializers.Serializer):
     first_name = serializers.CharField(required=False)
     last_name = serializers.CharField(required=False)
     email = serializers.EmailField(required=False)
+
+
+class PasswordChangeSerializer(serializers.Serializer):
+    old_password = serializers.CharField()
+    new_password = serializers.CharField()
+    new_password_confirm = serializers.CharField()
+
+    def validate(self, data):
+        if data['new_password'] != data['new_password_confirm']:
+            raise serializers.ValidationError('Passwords do not match!')
+        return data

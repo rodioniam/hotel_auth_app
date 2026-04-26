@@ -9,6 +9,7 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     password_hash = models.CharField()
     first_name = models.CharField()
+    middle_name = models.CharField(null=True, blank=True)
     last_name = models.CharField()
 
     role_id = models.ForeignKey(

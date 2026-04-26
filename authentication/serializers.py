@@ -12,6 +12,7 @@ class UserRegisterSerializer(serializers.Serializer):
     password = serializers.CharField()
     password_confirm = serializers.CharField()
     first_name = serializers.CharField()
+    middle_name = serializers.CharField(required=False)
     last_name = serializers.CharField()
 
     def validate(self, data):
@@ -28,13 +29,19 @@ class UserLoginSerializer(serializers.Serializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'first_name', 'last_name']
+        fields = ['id', 'email', 'first_name', 'middle_name', 'last_name']
+        extra_kwargs = {
+            'middle_name': {'required': False, 'allow_null': True}
+        }
 
 
 class UserProfileAdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'first_name', 'last_name', 'is_active', 'created_at']  # noqa
+        fields = ['id', 'email', 'first_name', 'middle_name', 'last_name', 'is_active', 'created_at']  # noqa
+        extra_kwargs = {
+            'middle_name': {'required': False, 'allow_null': True}
+        }
 
 
 class UserUpdateSerializer(serializers.Serializer):

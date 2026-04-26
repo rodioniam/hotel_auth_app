@@ -1,0 +1,66 @@
+[
+    {
+        "model": "api.businesselement",
+        "pk": 1,
+        "fields": {
+            "name": "user",
+            "description": "Users"
+        }
+    },
+    {
+        "model": "api.businesselement",
+        "pk": 2,
+        "fields": {
+            "name": "role",
+            "description": "Roles"
+        }
+    },
+    {
+        "model": "api.businesselement",
+        "pk": 3,
+        "fields": {
+            "name": "hotel",
+            "description": "Hotels"
+        }
+    },
+    {
+        "model": "api.businesselement",
+        "pk": 4,
+        "fields": {
+            "name": "room",
+            "description": "Rooms"
+        }
+    },
+    {
+        "model": "api.businesselement",
+        "pk": 5,
+        "fields": {
+            "name": "booking",
+            "description": "Bookings"
+        }
+    },
+    {
+        "model": "api.businesselement",
+        "pk": 6,
+        "fields": {
+            "name": "review",
+            "description": "Reviews"
+        }
+    },
+    {
+        "model": "api.businesselement",
+        "pk": 7,
+        "fields": {
+            "name": "reviewReply",
+            "description": "Review Replies"
+        }
+    },
+    {
+        "model": "api.businesselement",
+        "pk": 8,
+        "fields": {
+            "name": "accessRoleRules",
+            "description": "Access Rules"
+        }
+    }
+]

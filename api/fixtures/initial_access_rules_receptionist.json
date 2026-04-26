@@ -1,0 +1,122 @@
+[
+    {
+        "model": "api.accessrolerule",
+        "pk": 25,
+        "fields": {
+            "role_id": 4,
+            "element_id": 1,
+            "can_read": true,
+            "can_read_all": false,
+            "can_create": false,
+            "can_edit": true,
+            "can_edit_all": false,
+            "can_delete": true,
+            "can_delete_all": false
+        }
+    },
+    {
+        "model": "api.accessrolerule",
+        "pk": 26,
+        "fields": {
+            "role_id": 4,
+            "element_id": 2,
+            "can_read": false,
+            "can_read_all": false,
+            "can_create": false,
+            "can_edit": false,
+            "can_edit_all": false,
+            "can_delete": false,
+            "can_delete_all": false
+        }
+    },
+    {
+        "model": "api.accessrolerule",
+        "pk": 27,
+        "fields": {
+            "role_id": 4,
+            "element_id": 3,
+            "can_read": false,
+            "can_read_all": false,
+            "can_create": false,
+            "can_edit": false,
+            "can_edit_all": false,
+            "can_delete": false,
+            "can_delete_all": false
+        }
+    },
+    {
+        "model": "api.accessrolerule",
+        "pk": 28,
+        "fields": {
+            "role_id": 4,
+            "element_id": 4,
+            "can_read": true,
+            "can_read_all": true,
+            "can_create": false,
+            "can_edit": false,
+            "can_edit_all": false,
+            "can_delete": false,
+            "can_delete_all": false
+        }
+    },
+    {
+        "model": "api.accessrolerule",
+        "pk": 29,
+        "fields": {
+            "role_id": 4,
+            "element_id": 5,
+            "can_read": true,
+            "can_read_all": true,
+            "can_create": true,
+            "can_edit": true,
+            "can_edit_all": false,
+            "can_delete": true,
+            "can_delete_all": false
+        }
+    },
+    {
+        "model": "api.accessrolerule",
+        "pk": 30,
+        "fields": {
+            "role_id": 4,
+            "element_id": 6,
+            "can_read": true,
+            "can_read_all": true,
+            "can_create": false,
+            "can_edit": false,
+            "can_edit_all": false,
+            "can_delete": false,
+            "can_delete_all": false
+        }
+    },
+    {
+        "model": "api.accessrolerule",
+        "pk": 31,
+        "fields": {
+            "role_id": 4,
+            "element_id": 7,
+            "can_read": true,
+            "can_read_all": true,
+            "can_create": false,
+            "can_edit": false,
+            "can_edit_all": false,
+            "can_delete": false,
+            "can_delete_all": false
+        }
+    },
+    {
+        "model": "api.accessrolerule",
+        "pk": 32,
+        "fields": {
+            "role_id": 4,
+            "element_id": 8,
+            "can_read": false,
+            "can_read_all": false,
+            "can_create": false,
+            "can_edit": false,
+            "can_edit_all": false,
+            "can_delete": false,
+            "can_delete_all": false
+        }
+    }
+]

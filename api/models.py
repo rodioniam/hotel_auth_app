@@ -27,6 +27,7 @@ class Role(models.Model):
 
     role_names = {
         'guest': 'Guest',
+        'receptionist': 'Receptionist',
         'hotel_manager': 'Hotel manager',
         'admin': 'Admin'
     }

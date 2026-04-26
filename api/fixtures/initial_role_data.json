@@ -22,5 +22,13 @@
             "name": "guest",
             "description": "Guest - regular user"
         }
+    },
+    {
+        "model": "api.role",
+        "pk": 4,
+        "fields": {
+            "name": "receptionist",
+            "description": "Receptionist"
+        }
     }
 ]

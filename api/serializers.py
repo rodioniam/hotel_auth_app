@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Role, Room, Booking
+from .models import Role, Room, Booking, AccessRoleRule
 from django.utils import timezone
 
 
@@ -38,20 +38,12 @@ class ReviewReplySerializer(serializers.Serializer):
     created_at = serializers.DateTimeField(read_only=True)
 
 
-class AccessRoleRuleSerializer(serializers.Serializer):
-    element_id = serializers.IntegerField(read_only=True)
-    role_id = serializers.IntegerField(read_only=True)
-
-    can_read = serializers.BooleanField()
-    can_read_all = serializers.BooleanField()
-
-    can_edit = serializers.BooleanField()
-    can_edit_all = serializers.BooleanField()
-
-    can_create = serializers.BooleanField()
-
-    can_delete = serializers.BooleanField()
-    can_delete_all = serializers.BooleanField()
+class AccessRoleRuleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AccessRoleRule
+        fields = ['id', 'role_id', 'element_id', 'can_read', 'can_read_all',
+                  'can_edit', 'can_edit_all', 'can_create', 'can_delete', 'can_delete_all']
+        read_only_fields = ['role_id', 'element_id']
 
 
 class BookingSerializer(serializers.Serializer):

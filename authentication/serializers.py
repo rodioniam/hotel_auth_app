@@ -50,7 +50,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 class UserProfileAdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'first_name', 'middle_name', 'last_name', 'is_active', 'created_at']  # noqa
+        fields = ['id', 'email', 'first_name', 'middle_name', 'last_name', 'role_id', 'is_active', 'created_at']  # noqa
         extra_kwargs = {
             'middle_name': {'required': False, 'allow_null': True}
         }

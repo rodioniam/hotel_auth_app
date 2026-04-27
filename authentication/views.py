@@ -18,7 +18,7 @@ class RegisterView(APIView):
                 email=validated_data['email'],
                 password_hash=hash_password(validated_data['password']),
                 first_name=validated_data['first_name'],
-                middle_name=validated_data['middle_name'],
+                middle_name=validated_data.get('middle_name'),
                 last_name=validated_data['last_name']
             )
             return Response({'message': 'User registered'}, status=status.HTTP_201_CREATED)

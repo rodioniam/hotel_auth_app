@@ -12,7 +12,8 @@ class UserRegisterSerializer(serializers.Serializer):
     password = serializers.CharField()
     password_confirm = serializers.CharField()
     first_name = serializers.CharField()
-    middle_name = serializers.CharField(required=False)
+    middle_name = serializers.CharField(
+        required=False, allow_null=True, allow_blank=True)
     last_name = serializers.CharField()
 
     def validate(self, data):

@@ -17,6 +17,8 @@ class JWTAuthMiddleware:
                 token = request.headers.get('Authorization').split(' ')[1]
                 user_id = decode_token(token)['user_id']
                 request.auth_user = User.objects.get(id=user_id)
+                if not request.auth_user.is_active:
+                    request.auth_user = None
             except Exception:
                 request.auth_user = None
         else:

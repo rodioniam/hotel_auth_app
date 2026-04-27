@@ -89,6 +89,12 @@ python manage.py runserver
 5. Если нет токена - `401 Unauthorized`
 6. Если нет прав - `403 Forbidden`
 
+### Как работает logout
+1. Пользователь отправляет запрос на выход из аккаунта 
+2. `LogoutView` создает запись в базе данных в таблице `blacklistedtoken`
+3. Middleware выполняет проверку на наличие токена из запроса в базе `blacklistedtoken`
+4. При наличии токена в базе - `401 Unauthorized`
+
 ## Endpoints
 
 ### Аутентификация
@@ -96,7 +102,7 @@ python manage.py runserver
 |-------|-----|----------|
 | POST | `/auth/register/` | Регистрация |
 | POST | `/auth/login/` | Вход, возвращает токен |
-| POST | `/auth/logout/` | Выход |
+| POST | `/auth/logout/` | Выход, добавляет токен в `blacklistedtoken` таблицу |
 | GET | `/auth/profile/` | Просмотр профиля |
 | PATCH | `/auth/profile/update/` | Обновление профиля - имя/фамилия/email |
 | PATCH | `/auth/password/change/` | Смена пароля |

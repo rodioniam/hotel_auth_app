@@ -4,7 +4,7 @@
 """
 
 from .utils import decode_token
-from .models import User
+from .models import User, BlackListedToken
 
 
 class JWTAuthMiddleware:
@@ -15,6 +15,8 @@ class JWTAuthMiddleware:
         if 'Authorization' in request.headers and request.headers.get('Authorization').startswith('Bearer'):
             try:
                 token = request.headers.get('Authorization').split(' ')[1]
+                if BlackListedToken.objects.filter(token=token).exists():
+                    raise Exception('Token is blacklisted')
                 user_id = decode_token(token)['user_id']
                 request.auth_user = User.objects.get(id=user_id)
                 if not request.auth_user.is_active:

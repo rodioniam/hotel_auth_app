@@ -1,11 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import User
+from .models import User, BlackListedToken
 from .utils import hash_password, check_password, generate_token, decode_token
 from .serializers import *
-
-# регистрация пользователя
 
 
 class RegisterView(APIView):
@@ -23,8 +21,6 @@ class RegisterView(APIView):
             )
             return Response({'message': 'User registered'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# вход пользователя с проверкой пароля
 
 
 class LoginView(APIView):
@@ -82,6 +78,12 @@ class LogoutView(APIView):
     def post(self, request):
         if request.auth_user is None:
             return Response({'error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        token = request.headers.get('Authorization').split(' ')[1]
+        BlackListedToken.objects.create(
+            token=token
+        )
+
         return Response({'message': 'You are logged out'}, status=status.HTTP_200_OK)
 
 

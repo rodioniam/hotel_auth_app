@@ -1,6 +1,4 @@
 from django.db import models
-from django.utils import timezone
-from api.models import Role
 
 
 class User(models.Model):
@@ -25,3 +23,8 @@ class User(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class BlackListedToken(models.Model):
+    token = models.TextField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
